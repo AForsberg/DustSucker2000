@@ -144,8 +144,7 @@ public class Simulator {
 			dir = Direction.WEST;
 			break;
 		default:
-			System.out.println("Not a valid direction, try again");
-			createDustsucker();
+			isOK = false;
 			break;
 		}
 		if(isOK){
@@ -172,7 +171,8 @@ public class Simulator {
 		try{
 			int x = Integer.parseInt(startpos[1]);
 			int y = Integer.parseInt(startpos[2]);
-			if(x < 0 || y < 0 || x > (room.dimensions[0].length) || y >= room.dimensions[1].length){
+			
+			if(x < 0 || y < 0 || x >= (room.dimensions[0].length) || y >= room.dimensions[1].length){
 				return false;
 			}
 		}catch(NumberFormatException e){
@@ -186,7 +186,6 @@ public class Simulator {
 	 * Prints out the results
 	 */
 	private void printResult() {
-		System.out.println("DustSucker 2000 Simulator by Anton Forsberg\n");
 		System.out.println("This software simulates the movement of a vacuum cleaner. It will perform the movements you entered in the room you specified and print out the endposition and direction.\n");
 		System.out.println("Result: "+sucker.direction +" " +sucker.posX + " " +sucker.posY);
 		
@@ -210,6 +209,7 @@ public class Simulator {
 	 */
 	public static void main(String[] args) {
 		// Create a new Simulator object and run it.
+		System.out.println("DustSucker 2000 Simulator by Anton Forsberg\n");
 		Simulator sim = new Simulator();
 		sim.runSim();
 	}

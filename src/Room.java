@@ -1,10 +1,9 @@
 /**
  * @author Anton
- *
  */
 public class Room {
 
-	int[][] dimensions;
+	int[][] dimensions = new int[2][2];
 	
 	
 	/**
@@ -13,7 +12,8 @@ public class Room {
 	 * @param y Y-dimension
 	 */
 	public Room(int x, int y) {
-		dimensions = new int[x][y];
+		dimensions[0] = new int[x];
+		dimensions[1] = new int[y];
 	}
 	
 	//Getters & Setters
