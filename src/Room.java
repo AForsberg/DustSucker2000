@@ -1,32 +1,28 @@
 /**
- * 
- */
-
-/**
  * @author Anton
  *
  */
 public class Room {
 
-	int[][] room;
+	int[][] dimensions;
 	
 	
 	/**
-	 * @param x
-	 * @param y
+	 * Constructor sets room dimensions
+	 * @param x X-dimension
+	 * @param y Y-dimension
 	 */
 	public Room(int x, int y) {
-		room = new int[x][y];
+		dimensions = new int[x][y];
 	}
-
+	
+	//Getters & Setters
 	public int[][] getRoom() {
-		return room;
+		return dimensions;
 	}
 
 	public void setRoom(int[][] room) {
-		this.room = room;
-	}
-
-	
+		this.dimensions = room;
+	}	
 	
 }

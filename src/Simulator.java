@@ -1,10 +1,10 @@
 import java.util.*;
 
-/**
- * @author Anton
- *
- */
 
+/**
+ * DustSucker 2000 Simulator Software
+ * @author Anton
+ */
 public class Simulator {
 
 	Scanner in = new Scanner(System.in);
@@ -22,6 +22,45 @@ public class Simulator {
 		getMovement();
 	}
 	
+	/**
+	 * Performs the movement instructed by user
+	 * @param c Movement instruction
+	 */
+	private void executeMovement(char c) {
+		switch (c) {
+		case 'R':
+			sucker.turnRight();
+			break;
+		case 'L':
+			sucker.turnLeft();
+			break;
+		case 'A':
+			sucker.move();
+			break;
+		default:
+			break;
+		}
+		
+	}
+	
+	/**
+	 * Validates that the DustSucker does not go through walls. 
+	 * If its X or Y position is outside the room it will be reset to inside it, sort of like it had run into the wall and stopped.
+	 * 
+	 */
+	private void wallCheck() {
+		if(sucker.posX > room.dimensions[0].length -1){
+			sucker.setPosX(room.dimensions[0].length -1);
+		}else if(sucker.posX < 0){
+			sucker.setPosX(0);
+		}else if(sucker.posY > room.dimensions[1].length -1){
+			sucker.setPosY(room.dimensions[1].length -1);
+		}else if(sucker.posY < 0){
+			sucker.setPosY(0);
+		}
+		
+	}
+
 	/**
 	 * Gets movement commands from user.
 	 */
@@ -44,11 +83,37 @@ public class Simulator {
 		System.out.println("Please enter room length and width, separated by space:");
 		String input = in.nextLine();
 		String[] coords = input.split("\\s+");
-		x = Integer.parseInt(coords[0]);
-		y = Integer.parseInt(coords[1]);
-		room = new Room(x,y);
+		if(validateRoom(coords)){
+			x = Integer.parseInt(coords[0]);
+			y = Integer.parseInt(coords[1]);
+			room = new Room(x,y);
+		}else{
+			System.out.println("Invalid entry, try again.");
+			createRoom();
+		}
 	}
 	
+	/**
+	 * Validates that the room coordinates entered by the user are valid.
+	 * @param coords array containing coordinates to be checked
+	 * @return true if there are two coordinates that are positive integers, otherwise false.
+	 */
+	private boolean validateRoom(String[] coords) {
+		if(coords.length != 2){
+			return false;
+		}
+		try{
+			int x = Integer.parseInt(coords[0]);
+			int y = Integer.parseInt(coords[1]);
+			if(x <= 0 || y <= 0){
+				return false;
+			}
+		}catch(NumberFormatException e){
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Gets input from user and creates a new instance of Dustsucker at the position specified.
 	 */
@@ -61,9 +126,10 @@ public class Simulator {
 		System.out.println("Please enter initial direction and position of the sucker, separated by space:");
 		String input = in.nextLine();
 		String[] startpos = input.split("\\s+");
+		boolean isOK = validatePosition(startpos);
 		d = startpos[0].charAt(0);
-		x = Integer.parseInt(startpos[1]);
-		y = Integer.parseInt(startpos[2]);
+		
+		//Validates direction
 		switch (d) {
 		case 'N':
 			dir = Direction.NORTH;
@@ -78,37 +144,70 @@ public class Simulator {
 			dir = Direction.WEST;
 			break;
 		default:
-			System.out.println("Not a valid direction, terminating simulation.");
-			System.exit(1);
+			System.out.println("Not a valid direction, try again");
+			createDustsucker();
 			break;
 		}
-		sucker = new Dustsucker(x, y, dir);
+		if(isOK){
+			x = Integer.parseInt(startpos[1]);
+			y = Integer.parseInt(startpos[2]);
+			
+			sucker = new Dustsucker(x, y, dir);
+		}else{
+			System.out.println("Invalid entry, try again");
+			createDustsucker();
+		}
+		
 	}
 	
 	/**
-	 * Runs the simulation.
+	 * Validates the DustSuckers position as entered by user
+	 * @param startpos contains entered starting position
+	 * @return <code>true</code> if there are three position variables and the X and Y positions are integers within the room dimensions. Otherwise <code>false</code>
+	 */
+	private boolean validatePosition(String[] startpos) {
+		if (startpos.length != 3) {
+			return false;
+		}
+		try{
+			int x = Integer.parseInt(startpos[1]);
+			int y = Integer.parseInt(startpos[2]);
+			if(x < 0 || y < 0 || x > (room.dimensions[0].length) || y >= room.dimensions[1].length){
+				return false;
+			}
+		}catch(NumberFormatException e){
+			return false;
+		}
+		
+		return true;
+	}
+
+	/**
+	 * Prints out the results
+	 */
+	private void printResult() {
+		System.out.println("DustSucker 2000 Simulator by Anton Forsberg\n");
+		System.out.println("This software simulates the movement of a vacuum cleaner. It will perform the movements you entered in the room you specified and print out the endposition and direction.\n");
+		System.out.println("Result: "+sucker.direction +" " +sucker.posX + " " +sucker.posY);
+		
+	}
+	
+	/**
+	 * Runs the simulation by moving DustSucker according to instruction, checking walls 
+	 * and when there are no more instructions, printing results.
 	 */
 	public void runSim(){
-		System.out.println("Simulating...");
 		for (int i = 0; i < move.length; i++) {
-			char command = move[i];
-			switch (command) {
-			case 'A':
-				System.out.println("Moving forward");
-				break;
-			case 'R':
-				System.out.println("Turning right");
-				break;
-			case 'L':
-				System.out.println("Turning left");
-				break;
-			default:
-				break;
-			}
+			executeMovement(move[i]);
+			wallCheck();
 		}
-		System.out.println("Simulation stopped.");
+		printResult();
 	}	
-	
+
+	/**
+	 * Creates a new instance of Simulator and runs the simulation.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// Create a new Simulator object and run it.
 		Simulator sim = new Simulator();
