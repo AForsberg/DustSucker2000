@@ -3,7 +3,7 @@
  */
 public class Room {
 
-	int[][] dimensions = new int[2][2];
+	int[] dimensions = new int[2];
 	
 	
 	/**
@@ -12,16 +12,16 @@ public class Room {
 	 * @param y Y-dimension
 	 */
 	public Room(int x, int y) {
-		dimensions[0] = new int[x];
-		dimensions[1] = new int[y];
+		dimensions[0] = x;
+		dimensions[1] = y;
 	}
 	
 	//Getters & Setters
-	public int[][] getRoom() {
+	public int[] getRoom() {
 		return dimensions;
 	}
 
-	public void setRoom(int[][] room) {
+	public void setRoom(int[] room) {
 		this.dimensions = room;
 	}	
 	

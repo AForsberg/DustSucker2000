@@ -49,12 +49,12 @@ public class Simulator {
 	 * 
 	 */
 	private void wallCheck() {
-		if(sucker.posX > room.dimensions[0].length -1){
-			sucker.setPosX(room.dimensions[0].length -1);
+		if(sucker.posX > room.dimensions[0] -1){
+			sucker.setPosX(room.dimensions[0] -1);
 		}else if(sucker.posX < 0){
 			sucker.setPosX(0);
-		}else if(sucker.posY > room.dimensions[1].length -1){
-			sucker.setPosY(room.dimensions[1].length -1);
+		}else if(sucker.posY > room.dimensions[1] -1){
+			sucker.setPosY(room.dimensions[1] -1);
 		}else if(sucker.posY < 0){
 			sucker.setPosY(0);
 		}
@@ -172,7 +172,7 @@ public class Simulator {
 			int x = Integer.parseInt(startpos[1]);
 			int y = Integer.parseInt(startpos[2]);
 			
-			if(x < 0 || y < 0 || x >= (room.dimensions[0].length) || y >= room.dimensions[1].length){
+			if(x < 0 || y < 0 || x >= (room.dimensions[0]) || y >= room.dimensions[1]){
 				return false;
 			}
 		}catch(NumberFormatException e){
