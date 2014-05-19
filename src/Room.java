@@ -1,9 +1,12 @@
+import java.awt.Dimension;
+
 /**
  * @author Anton
  */
 public class Room {
 
-	int[] dimensions = new int[2];
+	//int[] dimensions = new int[2];
+	Dimension dimensions = new Dimension();
 	
 	
 	/**
@@ -12,17 +15,10 @@ public class Room {
 	 * @param y Y-dimension
 	 */
 	public Room(int x, int y) {
-		dimensions[0] = x;
-		dimensions[1] = y;
-	}
-	
-	//Getters & Setters
-	public int[] getRoom() {
-		return dimensions;
-	}
-
-	public void setRoom(int[] room) {
-		this.dimensions = room;
+		//dimensions[0] = x;
+		//dimensions[1] = y;
+		dimensions.width = x;
+		dimensions.height = y;
 	}	
 	
 }

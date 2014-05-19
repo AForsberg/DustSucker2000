@@ -4,10 +4,11 @@
  */
 public class Dustsucker {
 	
-	int posX;
-	int posY;
-	Direction direction;
+	private int posX;
+	private int posY;
+	private Direction direction;
 	
+
 	/**
 	 * Constructor setting position and direction variables
 	 * @param x x-position
@@ -62,23 +63,23 @@ public class Dustsucker {
 	}
 	
 	//Getters & Setters
-	
+
 	public int getPosX() {
 		return posX;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
 	}
 
 	public int getPosY() {
 		return posY;
 	}
 
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-
+	
 	public Direction getDirection() {
 		return direction;
 	}
@@ -86,5 +87,7 @@ public class Dustsucker {
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
+
+	
 
 }

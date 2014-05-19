@@ -49,13 +49,13 @@ public class Simulator {
 	 * 
 	 */
 	private void wallCheck() {
-		if(sucker.posX > room.dimensions[0] -1){
-			sucker.setPosX(room.dimensions[0] -1);
-		}else if(sucker.posX < 0){
+		if(sucker.getPosX() > room.dimensions.width -1){
+			sucker.setPosX(room.dimensions.width -1);
+		}else if(sucker.getPosX() < 0){
 			sucker.setPosX(0);
-		}else if(sucker.posY > room.dimensions[1] -1){
-			sucker.setPosY(room.dimensions[1] -1);
-		}else if(sucker.posY < 0){
+		}else if(sucker.getPosY() > room.dimensions.height -1){
+			sucker.setPosY(room.dimensions.height -1);
+		}else if(sucker.getPosY() < 0){
 			sucker.setPosY(0);
 		}
 		
@@ -172,7 +172,7 @@ public class Simulator {
 			int x = Integer.parseInt(startpos[1]);
 			int y = Integer.parseInt(startpos[2]);
 			
-			if(x < 0 || y < 0 || x >= (room.dimensions[0]) || y >= room.dimensions[1]){
+			if(x < 0 || y < 0 || x >= (room.dimensions.width) || y >= room.dimensions.height){
 				return false;
 			}
 		}catch(NumberFormatException e){
@@ -183,11 +183,10 @@ public class Simulator {
 	}
 
 	/**
-	 * Prints out the results
+	 * Prints out the direction and position of the DustSucker.
 	 */
 	private void printResult() {
-		System.out.println("This software simulates the movement of a vacuum cleaner. It will perform the movements you entered in the room you specified and print out the endposition and direction.\n");
-		System.out.println("Result: "+sucker.direction +" " +sucker.posX + " " +sucker.posY);
+		System.out.println("Result: "+sucker.getDirection() +" " +sucker.getPosX() + " " +sucker.getPosY());
 		
 	}
 	
@@ -210,6 +209,7 @@ public class Simulator {
 	public static void main(String[] args) {
 		// Create a new Simulator object and run it.
 		System.out.println("DustSucker 2000 Simulator by Anton Forsberg\n");
+		System.out.println("This software simulates the movement of a vacuum cleaner. It will perform the movements you entered in the room you specified and print out the endposition and direction.\n");
 		Simulator sim = new Simulator();
 		sim.runSim();
 	}
