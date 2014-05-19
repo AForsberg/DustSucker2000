@@ -7,10 +7,10 @@ import java.util.*;
  */
 public class Simulator {
 
-	Scanner in = new Scanner(System.in);
-	Room room;
-	Dustsucker sucker;
-	char[] move;
+	private Scanner in = new Scanner(System.in);
+	private Room room;
+	private Dustsucker sucker;
+	private char[] move;
 	
 
 	/**
@@ -49,12 +49,12 @@ public class Simulator {
 	 * 
 	 */
 	private void wallCheck() {
-		if(sucker.getPosX() > room.dimensions.width -1){
-			sucker.setPosX(room.dimensions.width -1);
+		if(sucker.getPosX() > room.getWidth() -1){
+			sucker.setPosX(room.getWidth() -1);
 		}else if(sucker.getPosX() < 0){
 			sucker.setPosX(0);
-		}else if(sucker.getPosY() > room.dimensions.height -1){
-			sucker.setPosY(room.dimensions.height -1);
+		}else if(sucker.getPosY() > room.getHeight() -1){
+			sucker.setPosY(room.getHeight() -1);
 		}else if(sucker.getPosY() < 0){
 			sucker.setPosY(0);
 		}
@@ -96,7 +96,7 @@ public class Simulator {
 	/**
 	 * Validates that the room coordinates entered by the user are valid.
 	 * @param coords array containing coordinates to be checked
-	 * @return true if there are two coordinates that are positive integers, otherwise false.
+	 * @return <code>true</code> if there are two coordinates that are positive integers, otherwise <code>false</code>.
 	 */
 	private boolean validateRoom(String[] coords) {
 		if(coords.length != 2){
@@ -172,7 +172,7 @@ public class Simulator {
 			int x = Integer.parseInt(startpos[1]);
 			int y = Integer.parseInt(startpos[2]);
 			
-			if(x < 0 || y < 0 || x >= (room.dimensions.width) || y >= room.dimensions.height){
+			if(x < 0 || y < 0 || x >= (room.getWidth()) || y >= room.getHeight()){
 				return false;
 			}
 		}catch(NumberFormatException e){

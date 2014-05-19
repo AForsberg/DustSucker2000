@@ -6,8 +6,7 @@ import java.awt.Dimension;
 public class Room {
 
 	//int[] dimensions = new int[2];
-	Dimension dimensions = new Dimension();
-	
+	private Dimension dimensions = new Dimension();
 	
 	/**
 	 * Constructor sets room dimensions
@@ -21,4 +20,12 @@ public class Room {
 		dimensions.height = y;
 	}	
 	
+	//Getters
+	public int getWidth(){
+		return dimensions.width;
+	}
+	
+	public int getHeight(){
+		return dimensions.height;
+	}
 }
