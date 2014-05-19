@@ -88,7 +88,7 @@ public class Simulator {
 			y = Integer.parseInt(coords[1]);
 			room = new Room(x,y);
 		}else{
-			System.out.println("Invalid entry, try again.");
+			System.out.println("Error: Invalid entry, try again.");
 			createRoom();
 		}
 	}
@@ -153,7 +153,7 @@ public class Simulator {
 			
 			sucker = new Dustsucker(x, y, dir);
 		}else{
-			System.out.println("Invalid entry, try again");
+			System.out.println("Error: Invalid entry, try again");
 			createDustsucker();
 		}
 		
